@@ -35,3 +35,4 @@ click
 # Image Processing
 Pillow
 imageio
+passlib[bcrypt]
