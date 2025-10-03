@@ -3,6 +3,7 @@ import os
 import sqlite3
 import bcrypt
 import jwt
+from jwt import PyJWTError, ExpiredSignatureError
 import json
 from datetime import datetime, timedelta, timezone
 from typing import Dict, List, Any, Optional
@@ -54,10 +55,13 @@ def get_user_by_username(username: str):
         print(f"Database error: {e}")
         return None
 
-def verify_password(plain_password: str, hashed_password: str) -> bool:
-    """Verify password against hash"""
+def verify_password_original(plain_password: str, hashed_password: str) -> bool:
+    """Verify password against hash using passlib (original method)"""
     try:
-        return bcrypt.checkpw(plain_password.encode('utf-8'), hashed_password.encode('utf-8'))
+        # Import passlib here to use the same method as original
+        from passlib.context import CryptContext
+        pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+        return pwd_context.verify(plain_password, hashed_password)
     except Exception as e:
         print(f"Password verification error: {e}")
         return False
@@ -71,15 +75,20 @@ def create_access_token(data: dict):
     return encoded_jwt
 
 def verify_token(credentials: HTTPAuthorizationCredentials = Depends(security)):
-    """Verify JWT token"""
+    """Verify JWT token - Original format"""
+    credentials_exception = HTTPException(
+        status_code=401,
+        detail="Could not validate credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
     try:
         payload = jwt.decode(credentials.credentials, JWT_SECRET, algorithms=[ALGORITHM])
         username: str = payload.get("sub")
         if username is None:
-            raise HTTPException(status_code=401, detail="Invalid authentication credentials")
+            raise credentials_exception
         return payload
-    except jwt.PyJWTError:
-        raise HTTPException(status_code=401, detail="Invalid authentication credentials")
+    except (PyJWTError, ExpiredSignatureError):
+        raise credentials_exception
 
 def get_current_user(token_data: dict = Depends(verify_token)):
     """Get current user from token"""
@@ -142,16 +151,28 @@ def health_check():
         "database_path": DB_FILE
     }
 
-# AUTH ROUTES
+# AUTH ROUTES - Using original format with JSON body
+class LoginRequest:
+    """Simple login request class"""
+    def __init__(self, username: str, password: str):
+        self.username = username
+        self.password = password
+
 @app.post("/api/auth/login")
-async def login(username: str = Form(...), password: str = Form(...)):
-    """Login endpoint using Form data"""
+async def login(request: dict):
+    """Login endpoint using JSON body (original format)"""
+    username = request.get("username")
+    password = request.get("password")
+    
+    if not username or not password:
+        raise HTTPException(status_code=422, detail="Username and password are required")
+    
     user = get_user_by_username(username)
     
-    if not user or not verify_password(password, user['password_hash']):
+    if not user or not verify_password_original(password, user['password_hash']):
         raise HTTPException(status_code=401, detail="Incorrect username or password")
     
-    # Create JWT token
+    # Create JWT token - EXACT same format as original
     token_data = {
         "sub": user["username"], 
         "role": user["role"], 
@@ -162,14 +183,14 @@ async def login(username: str = Form(...), password: str = Form(...)):
     access_token = create_access_token(data=token_data)
     
     return {
-        "access_token": access_token,
+        "access_token": access_token, 
         "token_type": "bearer",
         "user": {
             "username": user["username"],
-            "full_name": user["full_name"],
+            "fullName": user["full_name"],
             "role": user["role"],
             "department": user.get("department"),
-            "assigned_class": user.get("assigned_class")
+            "assignedClass": user.get("assigned_class")
         }
     }
 
