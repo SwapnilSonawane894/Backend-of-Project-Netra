@@ -1,0 +1,17 @@
+# Ultra-minimal requirements for initial deployment
+setuptools>=70.0.0
+wheel>=0.41.0
+
+# Core web server only
+fastapi==0.104.1
+uvicorn==0.24.0
+python-multipart==0.0.6
+
+# Basic auth
+bcrypt==4.1.2
+
+# Basic utilities
+requests==2.31.0
+pydantic==2.5.3
+
+# Note: Add other dependencies after basic deployment works

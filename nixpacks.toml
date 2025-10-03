@@ -1,10 +1,14 @@
-# nixpacks.toml - Render build configuration
+# nixpacks.toml - Render build configuration with Python 3.11
+[variables]
+PYTHON_VERSION = "3.11.9"
+
 [phases.setup]
-nixPkgs = ["python311", "gcc", "pkg-config"]
+nixPkgs = ["python311", "gcc", "pkg-config", "git"]
 
 [phases.install]
 cmds = [
-    "python -m pip install --upgrade pip setuptools wheel",
+    "python -m pip install --upgrade pip",
+    "pip install setuptools>=70.0.0 wheel>=0.41.0",
     "pip install -r requirements.txt"
 ]
 

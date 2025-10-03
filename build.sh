@@ -1,13 +1,20 @@
 #!/bin/bash
-# build.sh - Render build script
+# build.sh - Render build script with explicit Python version handling
 
-# Upgrade pip first
+set -e  # Exit on error
+
+echo "🚀 Starting build process..."
+
+# Ensure we're using Python 3.11
+python --version
+
+# Upgrade pip and install build tools separately
+echo "📦 Installing build tools..."
 python -m pip install --upgrade pip
-
-# Install build dependencies
-pip install setuptools wheel Cython
+pip install setuptools>=70.0.0 wheel>=0.41.0
 
 # Install requirements
+echo "📦 Installing dependencies..."
 pip install -r requirements.txt
 
-echo "Build completed successfully"
+echo "✅ Build completed successfully"
