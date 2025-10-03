@@ -1,0 +1,20 @@
+# Render deployment with Python 3.11 - Use original repo structure
+services:
+  - type: web
+    name: project-netra-backend
+    env: python
+    repo: https://github.com/SwapnilSonawane894/Backend-of-Project-Netra
+    runtime: python
+    buildCommand: |
+      python --version
+      python -m pip install --upgrade pip
+      pip install setuptools>=68.0.0 wheel>=0.40.0
+      pip install -r requirements.txt
+    startCommand: python main.py
+    plan: free
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: PORT
+        value: 10000
+    healthCheckPath: /

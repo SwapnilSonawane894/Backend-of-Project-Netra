@@ -1,16 +1,17 @@
-# nixpacks.toml - Render build configuration with Python 3.11 (no Rust)
+# nixpacks.toml - Force Python 3.11 for original repo structure
 [variables]
 PYTHON_VERSION = "3.11.9"
 
 [phases.setup]
-nixPkgs = ["python311"]
+nixPkgs = ["python311", "gcc", "pkg-config"]
 
 [phases.install]
 cmds = [
+    "python --version",
     "python -m pip install --upgrade pip",
-    "pip install setuptools>=70.0.0 wheel>=0.41.0",
-    "pip install --only-binary=all -r requirements_super_minimal.txt"
+    "pip install setuptools>=68.0.0 wheel>=0.40.0",
+    "pip install -r requirements.txt"
 ]
 
 [start]
-cmd = "python main_super_minimal.py"
+cmd = "python main.py"

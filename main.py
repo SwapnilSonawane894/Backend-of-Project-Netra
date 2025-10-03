@@ -1,4 +1,4 @@
-# main.py - Render deployment entry point
+# main.py - Original structure for Python 3.11
 import os
 import sys
 
@@ -11,8 +11,9 @@ from backend.main import app
 if __name__ == "__main__":
     import uvicorn
     # Render provides PORT environment variable
-    port = int(os.environ.get("PORT", 10000))
+    port = int(os.environ.get("PORT", 8000))
     host = os.environ.get("HOST", "0.0.0.0")
     
-    print(f"Starting server on {host}:{port}")
-    uvicorn.run("main:app", host=host, port=port, reload=False, workers=1)
+    print(f"🚀 Starting Project Netra server on {host}:{port}")
+    print(f"🐍 Python version: {sys.version}")
+    uvicorn.run(app, host=host, port=port, reload=False)

@@ -1,33 +1,37 @@
-# Essential build tools - MUST be first
-setuptools>=70.0.0
-wheel>=0.41.0
-pip>=24.0
+# Build tools for Python 3.11
+setuptools>=68.0.0
+wheel>=0.40.0
 
-# Core web framework
+# Core FastAPI - Python 3.11 compatible
 fastapi==0.104.1
 uvicorn[standard]==0.24.0
 python-multipart==0.0.6
 python-dotenv==1.0.0
 
+# Computer Vision (Python 3.11 compatible)
+opencv-python-headless==4.8.1.78
+numpy==1.24.3
+scipy==1.11.4
+
+# Face Recognition (Python 3.11 compatible)
+deepface==0.0.79
+tf-keras==2.15.0
+tensorflow==2.15.0
+retinaface==0.0.17
+
+# Tracking
+bytetracker==0.3.2
+
 # Authentication & Security  
 bcrypt==4.1.2
 PyJWT==2.8.0
 
-# Basic utilities
+# Utilities
 requests==2.31.0
 pydantic==2.5.3
 jinja2==3.1.2
 click==8.1.7
 
-# Image processing basics
+# Image Processing
 Pillow==10.0.1
-numpy==1.24.3
-
-# Computer Vision - only if needed
-opencv-python-headless==4.8.1.78
-
-# ML libraries - simplified for better compatibility
-# deepface==0.0.79
-# tensorflow-cpu==2.15.0
-# tf-keras==2.15.0
-# retinaface==0.0.17
+imageio==2.31.6
