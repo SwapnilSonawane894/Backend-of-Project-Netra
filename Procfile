@@ -1,2 +1,2 @@
-# Procfile for Railway deployment
+# Procfile for Render deployment
 web: python main.py

@@ -1,18 +1,23 @@
+# Build tools (required for Render)
+setuptools>=65.0.0
+wheel>=0.38.0
+Cython>=0.29.0
+
 # Core FastAPI
 fastapi==0.104.1
 uvicorn[standard]==0.24.0
 python-multipart==0.0.6
 python-dotenv==1.0.0
 
-# Computer Vision (Lightweight versions)
+# Computer Vision (Render-compatible versions)
 opencv-python-headless==4.8.1.78
 numpy==1.24.3
 scipy==1.11.4
 
-# Face Recognition (Compatible versions)
+# Face Recognition (Stable versions for Render)
 deepface==0.0.79
 tf-keras==2.15.0
-tensorflow==2.15.0
+tensorflow-cpu==2.15.0
 retinaface==0.0.17
 
 # Tracking
@@ -31,6 +36,3 @@ click==8.1.7
 # Image Processing
 Pillow==10.0.1
 imageio==2.31.6
-
-# Optional: Only if you need YOLO
-# ultralytics==8.0.196

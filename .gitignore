@@ -1,5 +1,16 @@
 # Virtual Environment
 venv/
+env/
+.venv/
+.env
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
 
 # VS Code settings
 .vscode/
@@ -10,3 +21,26 @@ venv/
 ._*
 .Spotlight-V100
 .Trashes
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+
+# IDE
+.idea/
+*.swp
+*.swo
+
+# Build files
+build/
+dist/
+*.egg-info/
+
+# Environment variables (keep your secrets safe!)
+.env.local
+.env.development
+.env.production
