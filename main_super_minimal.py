@@ -2,10 +2,12 @@
 import os
 import sys
 
-# Add the backend directory to Python path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'backend'))
+# Add the current directory and backend directory to Python path
+current_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, current_dir)
+sys.path.insert(0, os.path.join(current_dir, 'backend'))
 
-# Import the super minimal FastAPI app
+# Import the super minimal FastAPI app directly
 from backend.main_super_minimal import app
 
 if __name__ == "__main__":
@@ -15,5 +17,5 @@ if __name__ == "__main__":
     host = os.environ.get("HOST", "0.0.0.0")
     
     print(f"🚀 Starting SUPER minimal server on {host}:{port}")
-    print("🔧 This version has no database, no pydantic, just basic FastAPI")
-    uvicorn.run("main_super_minimal:app", host=host, port=port, reload=False, workers=1)
+    print("🔧 This version includes database and auth support")
+    uvicorn.run(app, host=host, port=port, reload=False)

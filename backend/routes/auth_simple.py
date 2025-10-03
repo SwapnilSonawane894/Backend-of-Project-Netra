@@ -1,7 +1,12 @@
 # backend/routes/auth_simple.py - Auth without pydantic models
+import os
+import sys
 from fastapi import APIRouter, HTTPException, Form
-from .. import database_handler
-from .. import auth
+
+# Use absolute imports to avoid relative import issues
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+import backend.database_handler as database_handler
+import backend.auth as auth
 
 router = APIRouter()
 

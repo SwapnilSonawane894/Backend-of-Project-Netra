@@ -1,11 +1,15 @@
 # backend/main_super_minimal.py - With database but no pydantic
 import os
+import sys
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from . import database_handler
+
+# Use absolute imports to avoid relative import issues
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import backend.database_handler as database_handler
 
 # Import simple auth routes that don't need pydantic models
-from .routes import auth_simple
+from backend.routes import auth_simple
 
 # Initialize the database on startup
 database_handler.initialize_database()
