@@ -1,17 +1,19 @@
-# Ultra-minimal requirements for initial deployment
+# Ultra-minimal requirements for initial deployment - avoid compilation
 setuptools>=70.0.0
 wheel>=0.41.0
 
-# Core web server only
-fastapi==0.104.1
-uvicorn==0.24.0
+# Core web server - use older versions that don't need Rust
+fastapi==0.95.2
+uvicorn==0.21.1
 python-multipart==0.0.6
 
-# Basic auth
-bcrypt==4.1.2
+# Basic auth - use older version
+bcrypt==4.0.1
 
 # Basic utilities
 requests==2.31.0
-pydantic==2.5.3
+
+# Use older pydantic that doesn't need Rust compilation
+pydantic==1.10.12
 
 # Note: Add other dependencies after basic deployment works
