@@ -2,9 +2,16 @@
 
 ## 🚀 Render Dashboard Settings
 
-### **Build Command:**
+### **Build Command (Try Option 1 first, then Option 2 if it fails):**
+
+**Option 1 - Full features:**
 ```bash
-python --version && pip install --upgrade pip setuptools wheel && pip install -r requirements.txt
+python --version && pip install --upgrade pip setuptools wheel && pip install --no-cache-dir -r requirements.txt
+```
+
+**Option 2 - Basic features (if Option 1 fails):**
+```bash
+python --version && pip install --upgrade pip setuptools wheel && pip install --no-cache-dir -r requirements_working.txt
 ```
 
 ### **Start Command:**

@@ -1,0 +1,26 @@
+# Minimal working requirements for Python 3.11 deployment
+setuptools>=68.0.0
+wheel>=0.40.0
+
+# Core FastAPI
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+python-multipart==0.0.6
+python-dotenv==1.0.0
+
+# Authentication & Security  
+bcrypt==4.1.2
+PyJWT==2.8.0
+
+# Basic utilities
+requests==2.31.0
+pydantic==2.5.3
+jinja2==3.1.2
+click==8.1.7
+
+# Image processing basics
+Pillow==10.0.1
+numpy==1.24.3
+
+# Database (SQLite is built-in)
+# Note: Add CV/ML packages after basic deployment works
