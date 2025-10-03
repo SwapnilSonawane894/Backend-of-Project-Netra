@@ -14,10 +14,10 @@ numpy==1.24.3
 scipy==1.11.4
 
 # Face Recognition (Python 3.11 compatible versions)
-deepface==0.0.79
-tf-keras==2.15.0
-tensorflow==2.15.0
-retinaface==0.0.6
+deepface
+tf-keras
+tensorflow
+retinaface
 
 # Tracking - skip for now due to compatibility issues
 # bytetracker==0.3.2
