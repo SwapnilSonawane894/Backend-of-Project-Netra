@@ -1,0 +1,29 @@
+# Web Framework
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+python-multipart==0.0.6
+python-dotenv==1.0.0
+
+# Computer Vision & ML
+opencv-python-headless==4.8.1.78
+deepface==0.0.79
+bytetracker==0.3.2
+torch==2.1.0
+torchvision==0.16.0
+numpy==1.26.4
+scipy==1.14.1
+
+# Database
+aiosqlite==0.19.0
+
+# Authentication & Security
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+
+# CORS & Middleware
+fastapi-cors==0.0.6
+
+# Optional but recommended
+pillow==10.4.0  # Required by deepface
+requests==2.31.0  # Required by deepface
+tqdm==4.66.1  # Progress bars
