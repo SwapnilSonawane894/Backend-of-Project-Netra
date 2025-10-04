@@ -11,7 +11,7 @@ from threading import Event
 import backend.database_handler as database_handler
 from scipy.spatial.distance import cosine
 from deepface import DeepFace
-from bytetracker import BYTETracker
+# from bytetracker import BYTETracker  # Temporarily disabled due to lap compilation issues
 
 log_format = '%(asctime)s - %(levelname)s - [%(module)s:%(lineno)d] - %(message)s'
 logging.basicConfig(level=logging.INFO, format=log_format, filename='logs/app.log', filemode='a')
@@ -53,7 +53,8 @@ class VerificationPipeline:
                 logger.warning("No class information provided in lecture")
                 self.target_class = None
             
-            self.tracker = BYTETracker(frame_rate=30)
+            # self.tracker = BYTETracker(frame_rate=30)  # Temporarily disabled
+            self.tracker = None  # Placeholder until tracker is fixed
             self.stop_event = stop_event
             self.confirmed_attendance = {}
             self.tracks = {}
@@ -131,8 +132,10 @@ class VerificationPipeline:
                     # Add a dummy class ID of 0 for BYTETracker compatibility
                     detections_for_tracker.append([x, y, x + w, y + h, confidence, 0])
 
-                if detections_for_tracker:
+                if detections_for_tracker and self.tracker is not None:
                     online_targets = self.tracker.update(torch.tensor(detections_for_tracker), [frame.shape[0], frame.shape[1]])
+                else:
+                    online_targets = []  # No tracking for now
             except Exception as e:
                 logger.warning(f"Face detection/tracking failed for frame {frame_count}: {e}")
 
