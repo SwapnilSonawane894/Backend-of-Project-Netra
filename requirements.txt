@@ -2,9 +2,9 @@
 setuptools>=68.0.0
 wheel>=0.40.0
 
-# Core FastAPI
-fastapi==0.104.1
-uvicorn[standard]==0.24.0
+# Core FastAPI - Compatible versions
+fastapi==0.95.2
+uvicorn[standard]==0.21.1
 python-multipart==0.0.6
 python-dotenv==1.0.0
 
@@ -13,10 +13,10 @@ opencv-python-headless==4.8.1.78
 numpy==1.24.3
 scipy==1.11.4
 
-# Face Recognition - Use compatible versions that don't conflict
+# Face Recognition - Use compatible versions
 deepface==0.0.75
-tensorflow==2.13.0
-# Skip retinaface for now due to strict tensorflow==2.1.0 requirement
+tensorflow==2.12.0
+# Skip retinaface for now due to strict tensorflow requirements
 # retinaface==0.0.6
 
 # Authentication & Security  
@@ -25,11 +25,14 @@ PyJWT==2.8.0
 
 # Utilities
 requests==2.31.0
-pydantic==2.5.3
+pydantic==1.10.12
 jinja2==3.1.2
 click==8.1.7
 
 # Image Processing
 Pillow==10.0.1
 imageio==2.31.6
+
+# Explicit typing-extensions version that works with all
+typing-extensions==4.5.0
 passlib[bcrypt]
