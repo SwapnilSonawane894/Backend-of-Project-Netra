@@ -16,6 +16,8 @@ scipy==1.9.3
 # Face Recognition - Use compatible versions
 deepface==0.0.75
 tensorflow==2.12.0
+torch==1.13.1
+torchvision==0.14.1
 # Try to use a different object tracker that doesn't need lap
 # For now, temporarily remove bytetracker to get the app running
 # bytetracker==0.3.2
