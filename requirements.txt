@@ -1,38 +1,35 @@
 # Build tools for Python 3.11
-setuptools
-wheel
+setuptools>=68.0.0
+wheel>=0.40.0
 
-# Core FastAPI - Python 3.11 compatible
-fastapi
-uvicorn[standard]
-python-multipart
-python-dotenv
+# Core FastAPI
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+python-multipart==0.0.6
+python-dotenv==1.0.0
 
 # Computer Vision (Python 3.11 compatible)
-opencv-python-headless
-numpy
-scipy
+opencv-python-headless==4.8.1.78
+numpy==1.24.3
+scipy==1.11.4
 
-# Face Recognition (Python 3.11 compatible versions)
-deepface
-tf-keras
-tensorflow
-retinaface
-
-# Tracking - skip for now due to compatibility issues
-# bytetracker
+# Face Recognition - Use compatible versions that don't conflict
+deepface==0.0.75
+tensorflow==2.13.0
+# Skip retinaface for now due to strict tensorflow==2.1.0 requirement
+# retinaface==0.0.6
 
 # Authentication & Security  
-bcrypt
-PyJWT
+bcrypt==4.1.2
+PyJWT==2.8.0
 
 # Utilities
-requests
-pydantic
-jinja2
-click
+requests==2.31.0
+pydantic==2.5.3
+jinja2==3.1.2
+click==8.1.7
 
 # Image Processing
-Pillow
-imageio
+Pillow==10.0.1
+imageio==2.31.6
 passlib[bcrypt]
