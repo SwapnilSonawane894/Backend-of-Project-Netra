@@ -437,39 +437,4 @@ async def save_timetable_endpoint(timetable_data: Dict[str, Any]):
         logger.error(f"Error saving timetable: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
 
-@router.get("/timetable", dependencies=[Depends(auth.get_current_user)])
-async def get_timetable_endpoint():
-    """
-    Get multi-class timetable structure.
-    Returns: {
-        "FYCO": {"timeSlots": [...], "schedule": {...}},
-        "SYCO": {"timeSlots": [...], "schedule": {...}},
-        "TYCO": {"timeSlots": [...], "schedule": {...}}
-    }
-    """
-    try:
-        schedule = database_handler.get_timetable()
-        
-        if schedule is None:
-            # Return empty structure for all classes
-            return {
-                "FYCO": {"timeSlots": [], "schedule": {"Monday": {}, "Tuesday": {}, "Wednesday": {}, "Thursday": {}, "Friday": {}, "Saturday": {}}},
-                "SYCO": {"timeSlots": [], "schedule": {"Monday": {}, "Tuesday": {}, "Wednesday": {}, "Thursday": {}, "Friday": {}, "Saturday": {}}},
-                "TYCO": {"timeSlots": [], "schedule": {"Monday": {}, "Tuesday": {}, "Wednesday": {}, "Thursday": {}, "Friday": {}, "Saturday": {}}}
-            }
-        
-        # If it's old single-timetable format, convert to multi-class
-        if "timeSlots" in schedule and "schedule" in schedule:
-            # Old format detected, convert to new multi-class format
-            return {
-                "FYCO": schedule,
-                "SYCO": {"timeSlots": [], "schedule": {"Monday": {}, "Tuesday": {}, "Wednesday": {}, "Thursday": {}, "Friday": {}, "Saturday": {}}},
-                "TYCO": {"timeSlots": [], "schedule": {"Monday": {}, "Tuesday": {}, "Wednesday": {}, "Thursday": {}, "Friday": {}, "Saturday": {}}}
-            }
-        
-        return schedule
-        
-    except Exception as e:
-        logger.error(f"Error getting timetable: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
 # --- Attendance and Notification Endpoints ---
