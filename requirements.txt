@@ -41,3 +41,4 @@ imageio==2.31.6
 # Explicit typing-extensions version that works with all
 typing-extensions==4.5.0
 passlib[bcrypt]
+twilio
